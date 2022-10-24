@@ -3,9 +3,9 @@ use wal_file::{RecordFile, RecordFileIterator, KeyValuePair};
 use ::{KeyType, ValueType};
 
 use std::error::Error;
-// use std::iter::Filter;
+use std::iter::Filter;
 
-/*
+
 const NUM_CHILDREN: usize = 32;
 const FILE_HEADER: &'static str = "B+Tree\0";
 const CURRENT_VERSION: u8 = 0x01;
@@ -24,7 +24,7 @@ struct Node<K: KeyType, V: ValueType> {
     payload: Payload<K,V>, // either children, or actual values
 }
 
-*/
+
 
 /// This struct represents an on-disk B+Tree. There are NUM_CHILDREN keys at each
 /// level in the tree. The on-disk format is as follows where VV is the version
@@ -73,12 +73,12 @@ impl <K: KeyType, V: ValueType> OnDiskBTree<K,V> {
         return self.file.insert_record(kv);
     }
 
-/*
+
     fn get(&self, key: &K) -> bool { //Box<Filter<RecordFileIterator<K,V>, fn(KeyValuePair<K,V>) -> bool>> {
         // return Box::new(self.into_iter().filter(|rec| &rec.key == key));
         return true;
     }
-*/
+
 
     pub fn contains_key(&self) -> bool {
         return true;
