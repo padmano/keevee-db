@@ -57,7 +57,7 @@ pub struct OnDiskBTreeIterator<'a, K: KeyType + 'a, V: ValueType + 'a> {
 
 impl <K: KeyType, V: ValueType> OnDiskBTree<K,V> {
     pub fn new(file_path: String, key_size: usize, value_size: usize) -> Result<OnDiskBTree<K,V>, Box<Error>> {
-        return Ok(OnDiskBTree{file: try!(RecordFile::new(&file_path, key_size, value_size))});
+        return Ok(OnDiskBTree{file: RecordFile::new(&file_path, key_size, value_size)? });
     }
 
     pub fn is_new(&self) -> Result<bool, Box<Error>> {
@@ -74,7 +74,7 @@ impl <K: KeyType, V: ValueType> OnDiskBTree<K,V> {
     }
 
 
-    fn get(&self, key: &K) -> bool { //Box<Filter<RecordFileIterator<K,V>, fn(KeyValuePair<K,V>) -> bool>> {
+    fn get(&self) -> bool { //Box<Filter<RecordFileIterator<K,V>, fn(KeyValuePair<K,V>) -> bool>> {
         // return Box::new(self.into_iter().filter(|rec| &rec.key == key));
         return true;
     }
